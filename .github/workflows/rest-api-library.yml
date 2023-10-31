@@ -1,0 +1,23 @@
+name: Github API REST LIBRARY
+
+on: 
+    push
+
+jobs:
+    rest-api-library:
+        runs-on: unbuntu-latest
+        steps:
+            - uses: actions\github-script@v6
+              with:
+                script: |
+                    for (const id in github.rest.repo) {
+                        try {
+                            if (typeof(github.rest.repo[id]) === "fuction"){
+                                console.log(id);
+                            } 
+                        } catch (err){
+                            console.error(err);
+                        }
+
+                    }
+            
