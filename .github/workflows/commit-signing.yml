@@ -46,6 +46,7 @@ jobs:
             git add test.md
             git commit -m "Testing Commit Signing"
             git verify-commit $( git rev-parse HEAD )
+            git push
         env:
             GPG_KEY_PASSPHRASE: ${{ secrets.GPG_KEY_PASSPHRASE }}
             GIT_COMMITTER_NAME: ${{ secrets.GIT_COMMITTER_NAME }}
