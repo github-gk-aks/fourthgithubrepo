@@ -55,7 +55,7 @@ jobs:
 
       - name: Push Changes to New Branch
         run: |
-            git remote set-url origin https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}
+            git remote set-url origin https://x-access-token:${{ secrets.GK_PAT }}@github.com/${{ github.repository }}.git
             echo "ORG: ${{ github.event.repository.owner.name }}"
             echo "Repo: $GITHUB_REPOSITORY"
             git push --set-upstream origin github-migration  # Replace 'branch-name' with the branch name
