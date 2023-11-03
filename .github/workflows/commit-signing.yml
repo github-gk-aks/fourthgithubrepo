@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@V2
+        uses: actions/checkout@v2
 
       - name: Import GPG key
         run: echo $GPG_KEY | base64 --decode | gpg --batch --import
