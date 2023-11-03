@@ -58,4 +58,4 @@ jobs:
             git push --set-upstream origin github-migration  # Replace 'branch-name' with the branch name
         working-directory: ${{ github.workspace }}
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GK_PAT }}
