@@ -11,16 +11,20 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: check gpg version
         run: gpg --version  
 
       - name: Import GPG key
-        run: echo $GPG_KEY | base64 --decode | gpg --batch --import
-        env:
-           GPG_KEY: ${{ secrets.GPG_KEY }}
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+            gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+            passphrase: ${{ secrets.PASSPHRASE }}
 
+      - name: List keys
+        run: gpg -K
+        
       - name: Add the custom gpg siging program that passes the passphrase to the gpg CLI
         run: |
             rm -rf /tmp/gpg.sh
