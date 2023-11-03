@@ -51,7 +51,7 @@ jobs:
             git config user.name "Gaurav Khanna"
             git add .
             git commit -m "Replace runs-on parameter"
-            git push --set-upstream origin github-migration  # Replace 'branch-name' with the branch name
+            git push -u origin github-migration  # Replace 'branch-name' with the branch name
         working-directory: ${{ github.workspace }}
         env:
             GITHUB_TOKEN: ${{ secrets.GK_PAT }}
