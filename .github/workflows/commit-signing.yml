@@ -9,9 +9,6 @@ jobs:
   setup-commit-signing:
     runs-on: ubuntu-latest
 
-    permissions:
-        actions: write
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -58,10 +55,10 @@ jobs:
 
       - name: Push Changes to New Branch
         run: |
-            #git remote add origin https://github.com/$GITHUB_ACTOR/$GITHUB_REPOSITORY.git
+            git remote set-url origin https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}
             echo "ORG: ${{ github.event.repository.owner.name }}"
             echo "Repo: $GITHUB_REPOSITORY"
             git push --set-upstream origin github-migration  # Replace 'branch-name' with the branch name
         working-directory: ${{ github.workspace }}
-        env:
-            GITHUB_TOKEN: ${{ secrets.GK_PAT }}
+        #env:
+         #   GITHUB_TOKEN: ${{ secrets.GK_PAT }}
