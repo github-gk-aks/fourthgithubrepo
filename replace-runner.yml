@@ -1,0 +1,40 @@
+name: Replace Workflow Parameters
+
+on:
+  push:
+    branches:
+      - test
+
+jobs:
+  replace-parameters:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Create and Checkout New Branch
+        run: |
+          git checkout -b branch-name  # Replace 'branch-name' with the desired branch name
+        working-directory: ${{ github.workspace }}
+
+      - name: Replace Strings in Workflow Files
+        run: |
+          for file in $(find .github/workflows -name '*.yml'); do
+            sed -i 's/ubuntu-latest/windows-latest/g' "$file"
+          done
+
+      - name: Commit Changes
+        run: |
+          git config user.email "your-email@example.com"
+          git config user.name "Your Name"
+          git add .
+          git commit -m "Replace runs-on parameter"
+        working-directory: ${{ github.workspace }}
+
+      - name: Push Changes to New Branch
+        run: |
+          git push --set-upstream origin branch-name  # Replace 'branch-name' with the branch name
+        working-directory: ${{ github.workspace }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
