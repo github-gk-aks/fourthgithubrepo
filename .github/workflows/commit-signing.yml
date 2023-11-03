@@ -56,7 +56,7 @@ jobs:
       - name: Push Changes to New Branch
         run: |
             #git remote add origin https://github.com/$GITHUB_ACTOR/$GITHUB_REPOSITORY.git
-            echo "ORG: $GITHUB_ACTOR"
+            echo "ORG: ${{ github.event.repository.owner.name }}"
             echo "Repo: $GITHUB_REPOSITORY"
             git push --set-upstream origin github-migration  # Replace 'branch-name' with the branch name
         working-directory: ${{ github.workspace }}
