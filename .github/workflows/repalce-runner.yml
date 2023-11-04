@@ -2,10 +2,10 @@ name: Update Runner Name
 
 on:
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Target Branch'
-        required: true
+    #inputs:
+      #branch:
+        #description: 'Target Branch'
+        #required: true
 
 jobs:
   setup-commit-signing:
