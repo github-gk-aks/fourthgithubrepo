@@ -38,9 +38,9 @@ jobs:
         env:
             GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
 
-      - name: Create and Checkout New Branch
+      - name: Create and Checkout github-migraion branch
         run: |
-            git checkout -b ${{ github.event.inputs.branch }}  # Replace 'branch-name' with the desired branch name
+            git checkout  github-migration  # Replace 'branch-name' with the desired branch name
         working-directory: ${{ github.workspace }}
 
       - name: Replace Strings in Workflow Files
@@ -55,7 +55,7 @@ jobs:
             git config user.name ${{ secrets.GIT_COMMITTER_NAME }}
             git add .
             git commit -m "Replace runs-on parameter"
-            git push -u origin ${{ github.event.inputs.branch }}  # Replace 'branch-name' with the branch name
+            git push  
         working-directory: ${{ github.workspace }}
         env:
             GITHUB_TOKEN: ${{ secrets.GK_PAT }}
