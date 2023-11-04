@@ -1,9 +1,11 @@
-name: Commit Signing Workflow
+name: Update Runner Name
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Target Branch'
+        required: true
 
 jobs:
   setup-commit-signing:
@@ -38,7 +40,7 @@ jobs:
 
       - name: Create and Checkout New Branch
         run: |
-            git checkout -b github-migration  # Replace 'branch-name' with the desired branch name
+            git checkout -b ${{ github.event.inputs.branch }}  # Replace 'branch-name' with the desired branch name
         working-directory: ${{ github.workspace }}
 
       - name: Replace Strings in Workflow Files
@@ -49,11 +51,11 @@ jobs:
 
       - name: Commit Changes
         run: |
-            git config user.email "38395482+gauravkhanna3007@users.noreply.github.com"
-            git config user.name "Gaurav Khanna"
+            git config user.email ${{ secrets.GIT_COMMITTER_EMAIL }}
+            git config user.name ${{ secrets.GIT_COMMITTER_NAME }}
             git add .
             git commit -m "Replace runs-on parameter"
-            git push -u origin github-migration  # Replace 'branch-name' with the branch name
+            git push -u origin ${{ github.event.inputs.branch }}  # Replace 'branch-name' with the branch name
         working-directory: ${{ github.workspace }}
         env:
             GITHUB_TOKEN: ${{ secrets.GK_PAT }}
