@@ -1,7 +1,7 @@
 name: Update Runner Name
 
 on:
-  push:
+    workflow_dispatch:
     #inputs:
       #branch:
         #description: 'Target Branch'
@@ -37,38 +37,27 @@ jobs:
         env:
             GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
 
-      # - name: Create and Checkout github-migraion branch
-      #   run: |
-      #       git checkout  github-migration  # Replace 'branch-name' with the desired branch name
-      #   working-directory: ${{ github.workspace }}
-
-      - name: Checkout, Replacement, Commit
+      - name: Create and Checkout github-migraion branch
         run: |
-            git checkout  github-migration 
-            echo "Current Working Directory: $(pwd)"
+            git checkout  github-migration  # Replace 'branch-name' with the desired branch name
+        working-directory: ${{ github.workspace }}
+
+      - name: Replace Strings in Workflow Files
+        run: |
             for file in $(find .github/workflows -name '*.yml' -not -name 'replace-runner.yml'); do
             sed -i 's/ubuntu-latest/windows-latest/g' "$file"
-            echo "Replaced in: $file"
             done
+
+      - name: Commit Changes
+        run: |
             git config user.email ${{ secrets.GIT_COMMITTER_EMAIL }}
             git config user.name ${{ secrets.GIT_COMMITTER_NAME }}
             git add .
-            git commit -m "Replace runs-on parameter - $(date +"%Y-%m-%d %H:%M:%S")"
+            git commit -m "Replace runs-on parameter"
             git push  
-        #working-directory: ${{ github.workspace }}
+        working-directory: ${{ github.workspace }}
         env:
             GITHUB_TOKEN: ${{ secrets.GK_PAT }}
-
-      # - name: Commit Changes
-      #   run: |
-      #       git config user.email ${{ secrets.GIT_COMMITTER_EMAIL }}
-      #       git config user.name ${{ secrets.GIT_COMMITTER_NAME }}
-      #       git add .
-      #       git commit -m "Replace runs-on parameter - $(date +"%Y-%m-%d %H:%M:%S")"
-      #       git push  
-      #   working-directory: ${{ github.workspace }}
-      #   env:
-      #       GITHUB_TOKEN: ${{ secrets.GK_PAT }}
 
       #- name: Push Changes to New Branch
       #  run: |
