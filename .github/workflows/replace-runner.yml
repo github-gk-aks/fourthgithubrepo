@@ -48,6 +48,7 @@ jobs:
             sed -i 's/ubuntu-latest/windows-latest/g' "$file"
             echo "Replaced in: $file"
             done
+        working-directory: ${{ github.workspace }}
 
       - name: Commit Changes
         run: |
