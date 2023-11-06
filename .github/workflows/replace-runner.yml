@@ -46,6 +46,7 @@ jobs:
         run: |
             for file in $(find .github/workflows -name '*.yml' -not -name 'replace-runner.yml'); do
             sed -i 's/ubuntu-latest/windows-latest/g' "$file"
+            echo "Replaced in: $file"
             done
 
       - name: Commit Changes
