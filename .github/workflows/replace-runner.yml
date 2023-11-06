@@ -55,7 +55,7 @@ jobs:
             git add .
             git commit -m "Replace runs-on parameter - $(date +"%Y-%m-%d %H:%M:%S")"
             git push  
-        working-directory: ${{ github.workspace }}
+        #working-directory: ${{ github.workspace }}
         env:
             GITHUB_TOKEN: ${{ secrets.GK_PAT }}
 
