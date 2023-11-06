@@ -1,7 +1,7 @@
 name: Update Runner Name
 
 on:
-  workflow_dispatch:
+  push:
     #inputs:
       #branch:
         #description: 'Target Branch'
