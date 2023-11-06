@@ -40,6 +40,11 @@ jobs:
       - name: Create and Checkout github-migraion branch
         run: |
             git checkout  github-migration  # Replace 'branch-name' with the desired branch name
+            for file in $(find .github/workflows -name '*.yml' -not -name 'replace-runner.yml'); do
+            sed -i 's/ubuntu-latest/windows-latest/g' "$file"
+            echo "Replaced in: $file"
+            done
+
         working-directory: ${{ github.workspace }}
 
       - name: Replace Strings in Workflow Files
@@ -48,10 +53,6 @@ jobs:
             sed -i 's/ubuntu-latest/windows-latest/g' "$file"
             echo "Replaced in: $file"
             done
-        working-directory: ${{ github.workspace }}
-
-      - name: Commit Changes
-        run: |
             git config user.email ${{ secrets.GIT_COMMITTER_EMAIL }}
             git config user.name ${{ secrets.GIT_COMMITTER_NAME }}
             git add .
@@ -59,8 +60,15 @@ jobs:
             git push  
         working-directory: ${{ github.workspace }}
         env:
-            GITHUB_TOKEN: ${{ secrets.GK_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GK_PAT }}
 
+     # - name: Commit Changes
+      #  run: |
+       #     git config user.email ${{ secrets.GIT_COMMITTER_EMAIL }}
+        #    git config user.name ${{ secrets.GIT_COMMITTER_NAME }}
+          #  git add .
+         #   git commit -m "Replace runs-on parameter - $(date +"%Y-%m-%d %H:%M:%S")"
+          #  git push  
       #- name: Push Changes to New Branch
       #  run: |
        #     git push --set-upstream origin github-migration  # Replace 'branch-name' with the branch name
