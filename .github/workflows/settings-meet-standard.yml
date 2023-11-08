@@ -24,7 +24,7 @@ jobs:
             await github.rest.repos.update({
               owner: '${{ github.repository_owner }}',
               repo: '${{ github.event.repository.name }}',
-              has_issues: true
+              has_issues: true,
               has_wiki: false
             });
 
