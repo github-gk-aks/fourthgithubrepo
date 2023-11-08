@@ -34,6 +34,6 @@ jobs:
           script: |
             await github.rest.repos.update({
               owner: '${{ github.repository_owner }}' 
-              repo: '${{ github.event.repository.name }}'
+              repo: '${{ github.event.repository.name }}',
               has_wiki: false
             });
