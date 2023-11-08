@@ -26,7 +26,13 @@ jobs:
               repo: '${{ github.event.repository.name }}',
               has_issues: true,
               has_wiki: false,
-              has_projects: false
+              has_projects: false,
+              allow_merge_commit: true,
+              allow_squash_merge: true,
+              allow_rebase_merge: true,
+              allow_auto_merge: false,
+              delete_branch_on_merge: true,
+              allow_forking: false
             });
 
     #   - name: Disable Wiki
