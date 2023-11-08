@@ -23,6 +23,6 @@ jobs:
           script: |
             await github.rest.repos.update({
               owner: '${{ github.repository_owner }}',
-              repo: '${{ github.repository }}',
+              repo: '${{ github.repository_name }}',
               has_issues: true
             });
