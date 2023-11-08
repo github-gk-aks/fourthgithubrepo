@@ -32,7 +32,6 @@ jobs:
               allow_rebase_merge: true,
               allow_auto_merge: false,
               delete_branch_on_merge: true
-              #allow_forking: false
             });
 
     #   - name: Disable Wiki
