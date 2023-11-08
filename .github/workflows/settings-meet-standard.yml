@@ -33,7 +33,7 @@ jobs:
           github-token: ${{ secrets.GK_PAT }}
           script: |
             await github.rest.repos.update({
-              owner: '${{ github.repository_owner }}' 
+              owner: '${{ github.repository_owner }}',
               repo: '${{ github.event.repository.name }}',
               has_wiki: false
             });
