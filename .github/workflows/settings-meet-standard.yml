@@ -30,10 +30,10 @@ jobs:
       - name: Disable Wiki
         uses: actions/github-script@v6
         with:
-           github-token: ${{ secrets.GK_PAT }}
-           script: |
-             await.github.rest.repos.update({
-               owner: '${{ github.repository_owner }}' 
-               repo: '${{ github.event.repository.name }}'
-               has_wiki: false
-             });
+          github-token: ${{ secrets.GK_PAT }}
+          script: |
+            await.github.rest.repos.update({
+              owner: '${{ github.repository_owner }}' 
+              repo: '${{ github.event.repository.name }}'
+              has_wiki: false
+            });
