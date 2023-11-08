@@ -30,7 +30,7 @@ jobs:
       - name: Disable Wiki
         uses: actions/github-script@v6
         with:
-           github-token: ${{ secrets.GK_PAT }}
+           github-token: ${{ secrets.GITHUB_TOKEN }}
            script: |
              await.github.rest.repos.upate({
                owner: '${{ github.repository_owner }}' 
