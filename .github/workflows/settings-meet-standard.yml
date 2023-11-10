@@ -81,9 +81,9 @@ jobs:
          github-token: ${{ secrets.GK_PAT }}
          script: |
            await github.rest.repos.enableVulnerabilityAlerts({
-           owner: '${{ github.repository_owner }}',
-           repo: '${{ github.event.repository.name }}'
-           });
+            owner: '${{ github.repository_owner }}',
+            repo: '${{ github.event.repository.name }}'
+            });
 
       - name: Require Signed Commits
         uses: actions/github-script@v6
@@ -91,7 +91,7 @@ jobs:
          github-token: ${{ secrets.GK_PAT }}
          script: |      
            await octokit.rest.repos.createCommitSignatureProtection({
-           owner: '${{ github.repository_owner }}',
-           repo: '${{ github.event.repository.name }}',
-           branch: "defaultBranch"
-           });   
+            owner: '${{ github.repository_owner }}',
+            repo: '${{ github.event.repository.name }}',
+            branch: "defaultBranch"
+            });   
