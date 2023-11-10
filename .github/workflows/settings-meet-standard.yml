@@ -47,7 +47,7 @@ jobs:
             await github.rest.repos.updateBranchProtection({
               owner: '${{ github.repository_owner }}',
               repo: '${{ github.event.repository.name }}',
-              branch: "defaultBranch",
+              branch: defaultBranch,
               required_pull_request_reviews: {
                 dismiss_stale_reviews: true,
                 require_code_owner_reviews: true,
