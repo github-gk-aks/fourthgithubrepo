@@ -100,10 +100,13 @@ jobs:
         with:
          github-token: ${{ secrets.GK_PAT }}
          script: |  
-            await github.rest.repos.createPagesSite({
+            const fs = require('fs');
+            // Create .nojekyll file
+            fs.writeFileSync('.nojekyll', '');
+            await github.rest.repos.createOrUpdateFileContents({
               owner: '${{ github.repository_owner }}',
               repo: '${{ github.event.repository.name }}',
-              settings: {
-                has_pages: false
-              }
+              message: 'Disable GitHub Pages',
+              content: Buffer.from(''),
+              branch: 'main' 
             }); 
