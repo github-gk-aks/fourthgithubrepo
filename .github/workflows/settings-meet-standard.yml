@@ -65,7 +65,10 @@ jobs:
               restrictions: {
                 users: [], // Add specific users if needed
                 teams: [] // Add specific teams if needed
-              }
+              },
+              required_linear_history: true,
+              allow_force_pushes: false,
+              allow_deletions: false,
             });
 
       - name: Enable Vulnerability alerts
