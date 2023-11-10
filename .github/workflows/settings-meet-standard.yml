@@ -36,7 +36,7 @@ jobs:
 
       - name: Determine Default Branch
         id: default-branch
-        run: echo "::set-output name=default_branch::$(git ls-remote --symref https://github.com/${{ github.repository }} HEAD | awk -F '/' '{print $NF}')"
+        run: echo "::set-output name=default_branch::$(git ls-remote --symref https://github.com/${{ github.repository }} HEAD | awk -F '/' '{print $NF}' | awk '{print $1}')"
 
       - name: Enable Branch Protection Rule for Repo
         uses: actions/github-script@v6
