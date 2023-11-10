@@ -86,7 +86,8 @@ jobs:
         uses: actions/github-script@v6
         with:
          github-token: ${{ secrets.GK_PAT }}
-         script: |      
+         script: | 
+           const defaultBranch = '${{ steps.default-branch.outputs.default_branch }}';     
            await github.rest.repos.createCommitSignatureProtection({
             owner: '${{ github.repository_owner }}',
             repo: '${{ github.event.repository.name }}',
