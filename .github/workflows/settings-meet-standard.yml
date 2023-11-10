@@ -69,6 +69,7 @@ jobs:
               required_linear_history: true,
               allow_force_pushes: false,
               allow_deletions: false,
+              require_conversation_resolution: true,
             });
 
       - name: Enable Vulnerability alerts
@@ -77,6 +78,17 @@ jobs:
          github-token: ${{ secrets.GK_PAT }}
          script: |
             await github.rest.repos.enableVulnerabilityAlerts({
-            owner: '${{ github.repository_owner }}',
-            repo: '${{ github.event.repository.name }}'
+              owner: '${{ github.repository_owner }}',
+              repo: '${{ github.event.repository.name }}'
             });
+
+      - name: Require Signed Commits
+        uses: actions/github-script@v6
+        with:
+         github-token: ${{ secrets.GK_PAT }}
+         script: |      
+           await octokit.rest.repos.createCommitSignatureProtection({
+            owner: '${{ github.repository_owner }}',
+            repo: '${{ github.event.repository.name }}',
+            branch: "defaultBranch"
+           });   
