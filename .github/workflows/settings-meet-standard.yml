@@ -85,13 +85,13 @@ jobs:
             repo: '${{ github.event.repository.name }}'
             });
 
-      - name: Require Signed Commits
-        uses: actions/github-script@v6
-        with:
-         github-token: ${{ secrets.GK_PAT }}
-         script: |      
-           await octokit.rest.repos.createCommitSignatureProtection({
-            owner: '${{ github.repository_owner }}',
-            repo: '${{ github.event.repository.name }}',
-            branch: "defaultBranch"
-            });   
+    #   - name: Require Signed Commits
+    #     uses: actions/github-script@v6
+    #     with:
+    #      github-token: ${{ secrets.GK_PAT }}
+    #      script: |      
+    #        await octokit.rest.repos.createCommitSignatureProtection({
+    #         owner: '${{ github.repository_owner }}',
+    #         repo: '${{ github.event.repository.name }}',
+    #         branch: "defaultBranch"
+    #         });   
