@@ -64,7 +64,7 @@ jobs:
               enforce_admins: true,
               restrictions: {
                 users: [], // Add specific users if needed
-                teams: [] // Add specific teams if needed
+                teams: ['firstgithubrepo-teamadmin'] // Add specific teams if needed
               },
               required_linear_history: true,
               allow_force_pushes: false,
