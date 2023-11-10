@@ -59,11 +59,11 @@ jobs:
                 # },
                 bypass_pull_request_allowances: false
               },
-             restrictions: {
-                #users: [], # Add specific users if needed
-                teams: [], # Add specific teams if needed
-                #apps: []   # Add specific apps if needed
-              },
+            #  restrictions: {
+            #     #users: [], # Add specific users if needed
+            #     teams: [], # Add specific teams if needed
+            #     #apps: []   # Add specific apps if needed
+            #   },
              enforce_admins: true, # Set to true if you want to enforce protection for admins
              require_conversation_resolution: true,
             #  required_status_checks: {
