@@ -52,7 +52,11 @@ jobs:
                 dismiss_stale_reviews: true,
                 require_code_owner_reviews: true,
                 required_approving_review_count: 2,
-             }
+             },
+             restrictions: {
+                users: [], # Add specific users if needed
+                teams: [], # Add specific teams if needed
+              },
             });
 
       - name: Enable Vulnerability alerts
