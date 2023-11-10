@@ -90,5 +90,5 @@ jobs:
            await github.rest.repos.createCommitSignatureProtection({
             owner: '${{ github.repository_owner }}',
             repo: '${{ github.event.repository.name }}',
-            branch: "defaultBranch"
+            branch: defaultBranch
            });   
