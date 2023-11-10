@@ -99,10 +99,9 @@ jobs:
         uses: actions/github-script@v6
         with:
          github-token: ${{ secrets.GK_PAT }}
-         script: | 
-           const defaultBranch = '${{ steps.default-branch.outputs.default_branch }}';     
+         script: |  
            await github.rest.repos.createPagesSite({
             owner: '${{ github.repository_owner }}',
             repo: '${{ github.event.repository.name }}',
-            source.branch: 'None'
+            source.branch: None
            }); 
