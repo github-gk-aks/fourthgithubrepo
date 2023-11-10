@@ -103,7 +103,5 @@ jobs:
             await github.rest.repos.createPagesSite({
               owner: '${{ github.repository_owner }}',
               repo: '${{ github.event.repository.name }}',
-              source: {
-                branch: 'None'
-              }
+              has_pages: false
             }); 
