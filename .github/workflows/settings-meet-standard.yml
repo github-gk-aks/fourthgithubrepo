@@ -25,6 +25,7 @@ jobs:
               owner: '${{ github.repository_owner }}',
               repo: '${{ github.event.repository.name }}',
               has_issues: true,
+              has_pages: false,
               has_wiki: false,
               has_projects: false,
               allow_merge_commit: true,
