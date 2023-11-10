@@ -63,8 +63,8 @@ jobs:
               },
               enforce_admins: true,
               restrictions: {
-                users: [], # Add specific users if needed
-                teams: [] # Add specific teams if needed
+                users: [], // Add specific users if needed
+                teams: [] // Add specific teams if needed
               }
             });
 
