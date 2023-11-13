@@ -1,14 +1,15 @@
 name: General Settings Meet Standard
 
 on:
-  workflow_dispatch:
-    inputs:
-      repository:
-        description: 'Repository name'
-        required: true
-      organization:
-        description: 'Organization name'
-        required: true
+  push:
+  # workflow_dispatch:
+  #   inputs:
+  #     repository:
+  #       description: 'Repository name'
+  #       required: true
+  #     organization:
+  #       description: 'Organization name'
+  #       required: true
 
 jobs:
   setting-meet-standard:
@@ -21,8 +22,8 @@ jobs:
           github-token: ${{ secrets.GK_PAT}}
           script: |
             await github.rest.repos.update({
-              owner: '${{ github.event.inputs.organization }}',
-              repo: '${{ github.event.inputs.repository }}',
+              owner: '${{ github.repository_owner }}',
+              repo: '${{ github.event.repository.name }}',
               has_issues: true,
               has_pages: false,
               has_wiki: false,
@@ -45,8 +46,8 @@ jobs:
          script: |
             const defaultBranch = '${{ steps.default-branch.outputs.default_branch }}';
             await github.rest.repos.updateBranchProtection({
-              owner: '${{ github.event.inputs.organization }}',
-              repo: '${{ github.event.inputs.repository }}',
+              owner: '${{ github.repository_owner }}',
+              repo: '${{ github.event.repository.name }}',
               branch: defaultBranch,
               required_pull_request_reviews: {
                 dismiss_stale_reviews: true,
@@ -78,8 +79,8 @@ jobs:
          github-token: ${{ secrets.GK_PAT }}
          script: |
             await github.rest.repos.enableVulnerabilityAlerts({
-              owner: '${{ github.event.inputs.organization }}',
-              repo: '${{ github.event.inputs.repository }}'
+              owner: '${{ github.repository_owner }}',
+              repo: '${{ github.event.repository.name }}'
             });
 
       - name: Require Signed Commits
@@ -89,8 +90,8 @@ jobs:
          script: | 
             const defaultBranch = '${{ steps.default-branch.outputs.default_branch }}';     
             await github.rest.repos.createCommitSignatureProtection({
-              owner: '${{ github.event.inputs.organization }}',
-              repo: '${{ github.event.inputs.repository }}',
+              owner: '${{ github.repository_owner }}',
+              repo: '${{ github.event.repository.name }}',
               branch: defaultBranch
             }); 
 
