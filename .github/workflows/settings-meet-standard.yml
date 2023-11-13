@@ -1,15 +1,16 @@
 name: General Settings Meet Standard
 
 on:
-  push:
-  # workflow_dispatch:
-  #   inputs:
-  #     repository:
-  #       description: 'Repository name'
-  #       required: true
-  #     organization:
-  #       description: 'Organization name'
-  #       required: true
+  workflow_call:
+    inputs:
+      repository:
+        type: string
+        description: 'Repository name'
+        required: true
+      organization:
+        type: string
+        description: 'Organization name'
+        required: true
 
 jobs:
   setting-meet-standard:
