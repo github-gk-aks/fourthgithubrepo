@@ -1,15 +1,15 @@
 name: General Settings Meet Standard
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       repository:
         type: string
         description: 'Repository name'
         required: true
-      organization:
+      organisation:
         type: string
-        description: 'Organization name'
+        description: 'organisation name'
         required: true
 
 jobs:
