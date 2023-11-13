@@ -1,15 +1,14 @@
 name: General Settings Meet Standard
 
 on:
-  push
-  #workflow_dispatch:
-    # inputs:
-    #   param1:
-    #     description: 'Parameter 1'
-    #     required: true
-    #   param2:
-    #     description: 'Parameter 2'
-    #     required: true
+  workflow_dispatch:
+    inputs:
+        repository:
+          description: 'Repository name'
+          required: true
+        organization:
+          description: 'Organization name'
+          required: true
 
 jobs:
   setting-meet-standard:
@@ -22,8 +21,8 @@ jobs:
           github-token: ${{ secrets.GK_PAT}}
           script: |
             await github.rest.repos.update({
-              owner: '${{ github.repository_owner }}',
-              repo: '${{ github.event.repository.name }}',
+              owner: '${{ github.event.inputs.organization }}',
+              repo: '${{ github.event.inputs.repository }}',
               has_issues: true,
               has_pages: false,
               has_wiki: false,
@@ -46,8 +45,8 @@ jobs:
          script: |
             const defaultBranch = '${{ steps.default-branch.outputs.default_branch }}';
             await github.rest.repos.updateBranchProtection({
-              owner: '${{ github.repository_owner }}',
-              repo: '${{ github.event.repository.name }}',
+              owner: '${{ github.event.inputs.organization }}',
+              repo: '${{ github.event.inputs.repository }}',
               branch: defaultBranch,
               required_pull_request_reviews: {
                 dismiss_stale_reviews: true,
@@ -79,8 +78,8 @@ jobs:
          github-token: ${{ secrets.GK_PAT }}
          script: |
             await github.rest.repos.enableVulnerabilityAlerts({
-              owner: '${{ github.repository_owner }}',
-              repo: '${{ github.event.repository.name }}'
+              owner: '${{ github.event.inputs.organization }}',
+              repo: '${{ github.event.inputs.repository }}'
             });
 
       - name: Require Signed Commits
@@ -90,21 +89,10 @@ jobs:
          script: | 
             const defaultBranch = '${{ steps.default-branch.outputs.default_branch }}';     
             await github.rest.repos.createCommitSignatureProtection({
-              owner: '${{ github.repository_owner }}',
-              repo: '${{ github.event.repository.name }}',
+              owner: '${{ github.event.inputs.organization }}',
+              repo: '${{ github.event.inputs.repository }}',
               branch: defaultBranch
             }); 
 
-      - name: Disable Github Pages
-        uses: actions/github-script@v6
-        with:
-         github-token: ${{ secrets.GK_PAT }}
-         script: |  
-            await github.rest.repos.update({
-              owner: '${{ github.repository_owner }}',
-              repo: '${{ github.event.repository.name }}',
-              settings: {
-                has_pages: false
-              }
-            }); 
+
   
